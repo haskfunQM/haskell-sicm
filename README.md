@@ -43,9 +43,9 @@ This changes the role of the program. The code is not merely an implementation *
 
 For example, a path
 
-$$
+```math
 q:t\mapsto q(t)
-$$
+```
 
 is represented in Haskell as an ordinary function:
 
@@ -56,9 +56,9 @@ type Path =
 
 A Lagrangian
 
-$$
+```math
 L=L(t,q,\dot q)
-$$
+```
 
 is also an ordinary function:
 
@@ -69,12 +69,12 @@ type Lagrangian =
 
 Then the action
 
-$$
+```math
 S[q]
 =
 \int_{t_0}^{t_1}
 L\left(t,q(t),\dot q(t)\right)\,dt
-$$
+```
 
 can itself be implemented as a function whose **input is a path**.
 
@@ -259,9 +259,9 @@ The polynomial engine converts suitable expressions into a canonical multivariat
 
 This makes identities such as
 
-$$
+```math
 (x+y)^2=x^2+2xy+y^2
-$$
+```
 
 decidable by normalization rather than by guessing rewrite sequences.
 
@@ -284,9 +284,9 @@ can be treated as **opaque algebraic atoms**.
 
 This does **not** claim that `sin theta` is a polynomial in `theta`. It only means that an expression such as
 
-$$
+```math
 (a\sin\theta+b\cos\theta)^2
-$$
+```
 
 can be expanded algebraically while the trigonometric subexpressions remain indivisible objects.
 
@@ -300,25 +300,25 @@ The identity layer stores common mathematical knowledge used by the prover.
 
 The current identity set includes, among others,
 
-$$
+```math
 \sin^2x+\cos^2x=1,
-$$
+```
 
-$$
+```math
 \sin(-x)=-\sin x,
 \qquad
 \cos(-x)=\cos x,
-$$
+```
 
 the sine and cosine addition formulas, double-angle formulas, exact common-angle values, and simple exponential/logarithmic identities.
 
 Expansion identities and reduction identities are kept conceptually distinct. For example,
 
-$$
+```math
 \sin(a+b)
 =
 \sin a\cos b+\cos a\sin b
-$$
+```
 
 is useful during a proof, but automatically expanding every occurrence of `sin(a+b)` would not always make an expression simpler.
 
@@ -338,9 +338,9 @@ diff x (3 * x ** 2 + 5 * x + 2)
 
 produces the equivalent of
 
-$$
+```math
 6x+5.
-$$
+```
 
 The differentiator also has a trace interface for showing important mathematical steps rather than every internal rewrite.
 
@@ -369,7 +369,7 @@ The current integrator is intentionally small. It handles a useful subset includ
 
 Examples already supported include forms equivalent to
 
-$$
+```math
 \int x\,dx,
 \qquad
 \int x^{-1}\,dx,
@@ -377,7 +377,7 @@ $$
 \int x\cos(x^2)\,dx,
 \qquad
 \int x\sin x\,dx.
-$$
+```
 
 It is not intended to become a complete symbolic integration system.
 
@@ -577,9 +577,9 @@ local t q v
 
 represents
 
-$$
+```math
 (t,q,\dot q).
-$$
+```
 
 For higher derivatives:
 
@@ -589,9 +589,9 @@ localN t q v [acceleration]
 
 can represent
 
-$$
+```math
 (t,q,\dot q,\ddot q).
-$$
+```
 
 Accessors include:
 
@@ -612,11 +612,11 @@ gammaN
 
 Mathematically,
 
-$$
+```math
 \Gamma[q](t)
 =
 (t,q(t),Dq(t),D^2q(t),\ldots).
-$$
+```
 
 This is an important SICM idea: instead of manually maintaining a table such as
 
@@ -633,13 +633,13 @@ the local state and `gamma` represent the derivative chain structurally.
 
 For a local expression
 
-$$
+```math
 F(t,q,\dot q,\ddot q,\ldots),
-$$
+```
 
 the total derivative is
 
-$$
+```math
 D_tF
 =
 \frac{\partial F}{\partial t}
@@ -648,7 +648,7 @@ D_tF
 +
 \frac{\partial F}{\partial\dot q}\ddot q
 +\cdots.
-$$
+```
 
 haskell-sicm exposes this as:
 
@@ -668,13 +668,13 @@ xdot =
 
 the package derives
 
-$$
+```math
 \dot x
 =
 \dot r\cos\theta
 -
 r\dot\theta\sin\theta
-$$
+```
 
 from the local-state information.
 
@@ -700,13 +700,13 @@ If `q` is an `up` structure, the gradient-like derivative is naturally returned 
 
 For
 
-$$
+```math
 L=L(t,q,\dot q),
-$$
+```
 
 the Euler-Lagrange expression is
 
-$$
+```math
 E(L)
 =
 D_t
@@ -715,7 +715,7 @@ D_t
 \right)
 -
 \frac{\partial L}{\partial q}.
-$$
+```
 
 haskell-sicm implements this as:
 
@@ -728,13 +728,13 @@ eulerLagrange
 
 For a one-dimensional harmonic oscillator,
 
-$$
+```math
 L
 =
 \frac12m\dot x^2
 -
 \frac12kx^2,
-$$
+```
 
 the code can be written schematically as:
 
@@ -749,27 +749,27 @@ equation =
 
 and the result is equivalent to
 
-$$
+```math
 m\ddot x+kx.
-$$
+```
 
 Setting the Euler-Lagrange expression to zero gives
 
-$$
+```math
 m\ddot x+kx=0.
-$$
+```
 
 ### Lagrange-d'Alembert interpretation
 
 If only the kinetic term is supplied,
 
-$$
+```math
 L=T,
-$$
+```
 
 then
 
-$$
+```math
 D_t
 \left(
 \frac{\partial T}{\partial\dot q}
@@ -778,7 +778,7 @@ D_t
 \frac{\partial T}{\partial q}
 =
 Q
-$$
+```
 
 can be interpreted as the generalized force required to produce a specified motion.
 
@@ -812,20 +812,20 @@ action t t0 t1 lagrangian path
 
 corresponding to
 
-$$
+```math
 S[q]
 =
 \int_{t_0}^{t_1}
 L(\Gamma[q](t))\,dt.
-$$
+```
 
 A varied path
 
-$$
+```math
 q_\epsilon(t)
 =
 q(t)+\epsilon\eta(t)
-$$
+```
 
 is represented by:
 
@@ -835,13 +835,13 @@ vary path variation epsilon
 
 For endpoint-fixed variations,
 
-$$
+```math
 \eta(t_0)=\eta(t_1)=0,
-$$
+```
 
 the first variation of the action gives
 
-$$
+```math
 \delta S
 =
 \int_{t_0}^{t_1}
@@ -854,11 +854,11 @@ D_t
 \right)
 \right]
 \eta\,dt.
-$$
+```
 
 Because the variation is arbitrary, stationary action requires
 
-$$
+```math
 \frac{\partial L}{\partial q}
 -
 D_t
@@ -866,7 +866,7 @@ D_t
 \frac{\partial L}{\partial\dot q}
 \right)
 =0,
-$$
+```
 
 which is equivalent to the Euler-Lagrange equation.
 
@@ -914,34 +914,34 @@ The derivation proceeds approximately as follows.
 
 ### 1. Construct Cartesian coordinates from polar coordinates
 
-$$
+```math
 x=r\cos\theta,
 \qquad
 y=r\sin\theta.
-$$
+```
 
 The total derivative operator computes `xdot` and `ydot`.
 
 The prover then verifies directly that
 
-$$
+```math
 \dot x^2+\dot y^2
 =
 \dot r^2+r^2\dot\theta^2.
-$$
+```
 
 No temporary substitutions such as `c = cos(theta)` and `s = sin(theta)` are required.
 
 ### 2. Use kinetic energy in Lagrange-d'Alembert form
 
-$$
+```math
 T
 =
 \frac12m
 \left(
 \dot r^2+r^2\dot\theta^2
 \right).
-$$
+```
 
 Calling
 
@@ -953,28 +953,28 @@ produces the generalized force required by the observed orbit.
 
 The angular component is proved equivalent to
 
-$$
+```math
 Q_\theta
 =
 m\frac{d}{dt}
 \left(
 r^2\dot\theta
 \right).
-$$
+```
 
 ### 3. Apply Kepler's second law
 
 Equal areas in equal times imply
 
-$$
+```math
 r^2\dot\theta=h=\text{constant}.
-$$
+```
 
 Therefore
 
-$$
+```math
 Q_\theta=0,
-$$
+```
 
 so there is no tangential force. The force must lie along the Sun-planet radial line.
 
@@ -982,39 +982,39 @@ so there is no tangential force. The force must lie along the Sun-planet radial 
 
 For an ellipse with the Sun at a focus,
 
-$$
+```math
 r(\theta)
 =
 \frac{p}{1+e\cos\theta}.
-$$
+```
 
 With
 
-$$
+```math
 u=\frac1r,
-$$
+```
 
 symbolic differentiation gives
 
-$$
+```math
 u''+u=\frac1p.
-$$
+```
 
 Combining this with the area law gives the radial acceleration
 
-$$
+```math
 a_r
 =
 -\frac{h^2}{pr^2}.
-$$
+```
 
 Thus
 
-$$
+```math
 F_r
 =
 -\frac{mh^2}{pr^2}.
-$$
+```
 
 The minus sign means the force points inward, and the magnitude is proportional to $1/r^2$.
 
@@ -1022,31 +1022,31 @@ The minus sign means the force points inward, and the magnitude is proportional 
 
 Kepler's third law makes
 
-$$
+```math
 \frac{h^2}{p}
-$$
+```
 
 a common constant for planets orbiting the same central body. Calling that constant $\mu$,
 
-$$
+```math
 F_r
 =
 -\frac{m\mu}{r^2}.
-$$
+```
 
 Newton's universal-gravity step identifies
 
-$$
+```math
 \mu=GM_{\text{Sun}}.
-$$
+```
 
 The example finally integrates the inferred force to recover
 
-$$
+```math
 V(r)
 =
 -\frac{m\mu}{r}
-$$
+```
 
 and feeds the resulting full gravitational Lagrangian back into `eulerLagrange`, closing the symbolic loop.
 
@@ -1171,13 +1171,13 @@ A one-dimensional harmonic oscillator illustrates the intended style.
 
 Mathematically,
 
-$$
+```math
 L
 =
 \frac12m\dot x^2
 -
 \frac12kx^2.
-$$
+```
 
 In Haskell the essential part should remain close to that equation:
 
@@ -1192,9 +1192,9 @@ let lagrangian =
 
 The expected result is
 
-$$
+```math
 m\ddot x+kx.
-$$
+```
 
 The public proof interface is then used to check that the generated expression is the familiar equation:
 
